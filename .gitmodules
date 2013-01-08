@@ -1,0 +1,3 @@
+[submodule "CAAT"]
+	path = CAAT
+	url = git://github.com/hyperandroid/CAAT.git
