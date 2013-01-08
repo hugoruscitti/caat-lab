@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../CAAT/build/caat-min.js"></script>
+
+    <script>
+      function on_ready() {
+          var element = document.getElementById('_c1');
+          var director = new CAAT.Director().initialize(100, 100, element);
+
+          var scene = director.createScene();
+
+          function create_circle(st){
+            var st = st || 0;
+            
+            var path = new CAAT.PathUtil.LinearPath().
+                setInitialPosition(50, 50).
+                setFinalPosition(80, 80);
+
+            var move = new CAAT.Behavior.PathBehavior().setPath(path).setFrameTime(st, 1000);    
+            
+            console.log(st);
+
+            var circle = new CAAT.ShapeActor().
+            setLocation(50,50).
+            setSize(5,5).
+            setFillStyle('#ff0000').
+            setStrokeStyle('#000000').
+            setFrameTime(st, 2000).addBehavior(move);
+
+            scene.addChild(circle);
+          };
+            
+          create_circle();
+          scene.createTimer(0, 500, function(st, tt, ti){
+            console.log('hola mundo');
+            create_circle(st);
+            ti.reset(st);
+          }); 
+          director.loop(1);
+        }
+    </script>
+  </head>
+
+  <body onload='on_ready()'>
+    <canvas id='_c1'></canvas>
+  </body>
+</html>
